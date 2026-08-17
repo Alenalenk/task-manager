@@ -20,7 +20,7 @@ export async function logupAction(
 
 
   const email = formData.get("email") as string;
-  const password1 = formData.get("password1")  ;
+  const password1 = formData.get("password1");
   const password2 = formData.get("password2");
 
 
@@ -46,17 +46,25 @@ export async function logupAction(
 
   console.log(hashPassword)
 
-  const user = await prisma.user.create({
-    data: {
-      email,
-      password: hashPassword
-    }
-  })
+  try {
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashPassword
+      }
+    })
 
-  
 
-  return {
-    success: true,
-    message: "Успішно"
-  };
+
+    return {
+      success: true,
+      message: "Успішно"
+    };
+  } catch (error) {
+    console.log(error)
+    return {
+      success: false,
+      message: "Щось пішло не так"
+    };
+  }
 }

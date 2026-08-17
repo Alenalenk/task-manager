@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/auth";
+import { prisma } from "./lib/prisma";
 
 export async function proxy(request: NextRequest) {
 
@@ -14,7 +15,14 @@ export async function proxy(request: NextRequest) {
     }
 
     try {
-        await verifyToken(token);
+        const email = await verifyToken(token);
+
+
+        await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
 
         return NextResponse.next();
     } catch {

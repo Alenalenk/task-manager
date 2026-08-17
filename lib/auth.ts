@@ -21,11 +21,15 @@ export const verifyToken = async (token: string) => {
         token,
         secret)
 
+    if (!(typeof payload.email === 'string')) {
+        throw new Error("Токен відсутній")
+    }
+
     return payload.email
 
 }
 
-export const getSession = async () => {
+export const getSession = async (): Promise<string | null> => {
     const cookieStore = await cookies();
 
     const token = cookieStore.get("session_user")?.value;
@@ -34,7 +38,7 @@ export const getSession = async () => {
 
     const { payload } = await jwtVerify(token, secret)
 
-    return payload.email
+    return typeof payload.email === 'string' ? payload.email : null
 
 }
 
