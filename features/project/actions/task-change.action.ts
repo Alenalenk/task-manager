@@ -3,16 +3,16 @@
 import { prisma } from '@/lib/prisma';
 import { ActionState } from '@/types/types';
 import { getUserId } from '@/entities/user/user-query';
-import { commentSchema } from '../schemas/comment.schema';
+import { taskSchema } from '../schemas/task.schema';
 
 
-export async function commentCreateAction(
+export async function taskChangeAction(
     prevState: ActionState | null,
     formData: FormData
 ): Promise<ActionState> {
     const rowData = Object.fromEntries(formData.entries())
 
-    const validated = commentSchema.safeParse(rowData)
+    const validated = taskSchema.safeParse(rowData)
 
     if (!validated.success) {
         return {
@@ -23,11 +23,11 @@ export async function commentCreateAction(
 
     const data = validated.data
 
-    let comment
+    let task
 
     try {
 
-        if (!data.comment) {
+        if (!data.title) {
             return {
                 success: false,
                 message: 'Заповніть поле назва',
@@ -43,13 +43,14 @@ export async function commentCreateAction(
             }
         }
 
-        comment = await prisma.comment.create({
+        task = await prisma.task.update({
+            where: { id: data.id },
             data: {
                 ...data, authorId: userId
             }
         })
 
-        console.log(comment)
+        console.log(task)
 
         return {
             success: true,

@@ -1,6 +1,13 @@
 import { z } from 'zod'
 
+cons
+
 export const taskSchema = z.object({
+    id: z
+        .number()
+        .optional(),
+    status: z
+
     title: z
         .string("Назва є обов'язковим полем")
         .min(1, "Назва не може бути порожньою")

@@ -13,8 +13,6 @@ export async function taskCreateAction(
 
     const rowData = Object.fromEntries(formData.entries())
 
-    console.log(rowData)
-
     const validated = taskSchema.safeParse(rowData)
 
     if (!validated.success) {
@@ -26,7 +24,6 @@ export async function taskCreateAction(
 
     const data = validated.data
 
-    console.log(data)
     let task
 
     try {
@@ -52,8 +49,6 @@ export async function taskCreateAction(
                 ...data, authorId: userId
             }
         })
-
-        console.log(task)
 
         return {
             success: true,

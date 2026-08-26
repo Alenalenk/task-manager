@@ -8,12 +8,12 @@ export const commentSchema = z.object({
 
     taskId: z
         .string()
-        .nullable()
+        .optional()
         .transform(id => Number(id)),
 
     projectId: z
         .string()
-        .nullable()
+        .optional()
         .transform(id => Number(id))
 })
 

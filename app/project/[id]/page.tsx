@@ -8,7 +8,6 @@ type ProjectPageProps = {
     }>;
 };
 
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { id } = await params
 
@@ -20,11 +19,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     
 
     return (
-        <div className="">
+        <div className="min-w-full">
 
             <CreateTaskModal id={+id}/>
             <ProjectContent project={project.data} />
-
             
         </div>
     )

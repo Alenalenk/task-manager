@@ -44,8 +44,6 @@ export async function logupAction(
 
   const hashPassword = await bcrypt.hash(password1, saltRounds)
 
-  console.log(hashPassword)
-
   try {
     const user = await prisma.user.create({
       data: {
@@ -61,7 +59,6 @@ export async function logupAction(
       message: "Успішно"
     };
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       message: "Щось пішло не так"

@@ -1,5 +1,4 @@
 import { getUserId } from "@/entities/user/user-query";
-import { getSession, verifyToken } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { UserProject, UserProjectTask } from "@/types/project";
 import { ActionState } from "@/types/types";
@@ -37,15 +36,13 @@ export async function getUserProjects(): Promise<UserProject[] | ActionState> {
     return projects
 }
 
-type ProjectActionState = ActionState & {data?: UserProjectTask}
+type ProjectActionState = ActionState & { data?: UserProjectTask }
 
 export async function getProject(id: number): Promise<ProjectActionState> {
     let project;
 
     try {
         const userId = await getUserId();
-
-        console.log(userId, id)
 
         const relation = await prisma.userOnProject.findUnique({
             where: {
@@ -59,22 +56,46 @@ export async function getProject(id: number): Promise<ProjectActionState> {
 
                 project: {
                     include: {
-                        tasks: true,
+                        tasks: {
+                            include: {
+                                comments: {
+                                    include: {
+                                        author: {
+                                            select: {
+                                                email: true,
+                                            },
+                                        },
+                                    }
+                                }
+                            },
+                        },
+                        comments: {
+                            where: {
+                                taskId: null
+                            },
+                            include: {
+                                author: {
+                                    select: {
+                                        email: true,
+                                    },
+                                },
+                            }
+                        }
                     },
                 },
-            },
-        })
-
-        console.log(relation)
+            }
+        });
 
         if (!relation) {
             return {
                 success: false,
-                message: "З проєктом винекли проблеми"
+                message: "З проєктом виникли проблеми"
             }
         }
 
         project = { ...relation?.project, userRole: relation?.userRole }
+
+        console.log('Project:', project)
 
     } catch (error) {
         return {
