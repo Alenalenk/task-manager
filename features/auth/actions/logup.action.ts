@@ -56,7 +56,7 @@ export async function logupAction(
 
     return {
       success: true,
-      message: "Успішно"
+      message: "Акаутнт успішно створено! Перейдіть на сторінку входу для авторизації."
     };
   } catch (error) {
     return {

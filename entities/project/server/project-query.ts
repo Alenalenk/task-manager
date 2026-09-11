@@ -66,7 +66,12 @@ export async function getProject(id: number): Promise<ProjectActionState> {
                                             },
                                         },
                                     }
-                                }
+                                },
+                                author: {
+                                    select: {
+                                        email: true,
+                                    },
+                                },
                             },
                         },
                         comments: {
@@ -80,7 +85,8 @@ export async function getProject(id: number): Promise<ProjectActionState> {
                                     },
                                 },
                             }
-                        }
+                        },
+
                     },
                 },
             }
@@ -95,7 +101,6 @@ export async function getProject(id: number): Promise<ProjectActionState> {
 
         project = { ...relation?.project, userRole: relation?.userRole }
 
-        console.log('Project:', project)
 
     } catch (error) {
         return {

@@ -49,7 +49,6 @@ export async function commentCreateAction(
             }
         })
 
-        console.log(comment)
 
         return {
             success: true,

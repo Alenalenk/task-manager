@@ -13,6 +13,9 @@ export type CommentWithAuthor = Comment & {
 
 export type TaskWithComments = Task & {
   comments: CommentWithAuthor[];
+  author: {
+    email: string;
+  };
 };
 
 export type UserProjectTask = UserProject & {

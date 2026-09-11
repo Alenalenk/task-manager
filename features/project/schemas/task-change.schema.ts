@@ -2,7 +2,7 @@ import { Status } from '@/lib/generated/prisma/browser'
 import { z } from 'zod'
 
 
-export const taskSchema = z.object({
+export const taskChangeSchema = z.object({
     id: z
         .number()
         .optional(),
@@ -20,19 +20,13 @@ export const taskSchema = z.object({
         .string(),
 
     dateStart: z
-        .string()
-        .nullable()
-        .transform(date =>  date ? new Date(date).toISOString() : null),
+        .date()
+        .nullable(),
 
     dateEnd: z
-        .string()
-        .nullable()
-        .transform(date => date ? new Date(date).toISOString() : null),
-
-    projectId: z
-        .string()
-        .transform(id => Number(id))
+        .date()
+        .nullable(),
 })
 
 // Автоматичне виведення типу TypeScript зі схеми Zod
-export type LoginInput = z.infer<typeof taskSchema>
+export type LoginInput = z.infer<typeof taskChangeSchema>

@@ -1,18 +1,18 @@
 'use server'
 
 import { prisma } from '@/lib/prisma';
-import { ActionState } from '@/types/types';
+import { ActionState, TaskFormData } from '@/types/types';
 import { getUserId } from '@/entities/user/user-query';
-import { taskSchema } from '../schemas/task.schema';
+import { taskChangeSchema } from '../schemas/task-change.schema';
 
 
 export async function taskChangeAction(
     prevState: ActionState | null,
-    formData: FormData
+    formData: TaskFormData
 ): Promise<ActionState> {
-    const rowData = Object.fromEntries(formData.entries())
+    const rowData = formData;
 
-    const validated = taskSchema.safeParse(rowData)
+    const validated = taskChangeSchema.safeParse(rowData)
 
     if (!validated.success) {
         return {
@@ -50,14 +50,12 @@ export async function taskChangeAction(
             }
         })
 
-        console.log(task)
-
         return {
             success: true,
             message: "Все ок"
         }
     } catch (err) {
-        console.error('Comment create action error:', err)
+
         return {
             success: false,
             message: 'Щось пішло не так. Спробуйте пізніше',

@@ -19,7 +19,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     
 
     return (
-        <div className="min-w-full">
+        <div className="min-w-full py-5">
 
             <CreateTaskModal id={+id}/>
             <ProjectContent project={project.data} />

@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Datepicker, Label, Textarea, TextInput } from "flowbite-react";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { createAction } from "../actions/project-create.action";
 
 const initialState = {
@@ -36,9 +36,9 @@ export default function ProjectCreateForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="dateStart">Дата початку</Label>
                 </div>
-                <Datepicker 
-                    id="dateStart" 
-                    name="dateStart" 
+                <Datepicker
+                    id="dateStart"
+                    name="dateStart"
                     value={dateStart}
                     onChange={setDateStart}
                 />
@@ -47,14 +47,14 @@ export default function ProjectCreateForm() {
                 <div className="mb-2 block">
                     <Label htmlFor="dateEnd">Дата закінчення</Label>
                 </div>
-                <Datepicker 
-                    id="dateEnd" 
-                    name="dateEnd" 
+                <Datepicker
+                    id="dateEnd"
+                    name="dateEnd"
                     value={dateEnd}
                     onChange={setDateEnd}
                 />
             </div>
-            <Button type="submit" color="secondary">Submit</Button>
+            <Button type="submit" color="secondary">Зберегти</Button>
         </form>
     )
 }
