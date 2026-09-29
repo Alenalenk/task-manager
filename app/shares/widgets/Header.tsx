@@ -10,7 +10,7 @@ export const Header = () => {
     const isAuthPages = pathname.includes("/auth/");
 
     return (
-        <header className="fixed w-full z-20 top-0 start-0 shadow-xl">
+        <header className="fixed w-full z-50 top-0 start-0 shadow-xl">
             <Navbar fluid rounded>
                 <NavbarBrand as={Link} href="/">
                     <img src="/logo.png" className="mr-3 h-6 sm:h-9" alt="Logo" />

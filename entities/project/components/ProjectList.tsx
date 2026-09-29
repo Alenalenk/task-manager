@@ -12,7 +12,6 @@ export default function ProjectList({ data }: ProjectList) {
 
     return (
         <div className="py-5">
-            <h3 className="text-lg font-semibold text-center z-40">ПРОЕКТИ</h3>
             <div className="overflow-x-auto my-3">
                 <Table>
                     <TableHead>
@@ -46,9 +45,6 @@ export default function ProjectList({ data }: ProjectList) {
                 </Table>
 
             </div>
-            <ul>
-
-            </ul>
         </div>
     )
 }
