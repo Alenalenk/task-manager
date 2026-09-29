@@ -1,6 +1,13 @@
 import { ProjectContent } from "@/entities/project/components/ProjectContent";
 import { getProject } from "@/entities/project/server/project-query"
 import { CreateTaskModal } from "@/features/project/components/CreateTask";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Сторінка проекту | TaskManager',
+  description: 'Створіть обліковий запис',
+}
+
 
 type ProjectPageProps = {
     params: Promise<{

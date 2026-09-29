@@ -1,6 +1,8 @@
 import { useActionState } from "react";
 import { logoutAction } from "../actions/logout.action";
 import { Button } from "flowbite-react";
+import { redirect } from "next/navigation";
+import { useGlobalActionError } from "@/app/shares/hooks/useGlobalActionError";
 
 const initialState = {
     success: false,
@@ -12,9 +14,16 @@ export const LogoutForm = () => {
         logoutAction,
         initialState
     );
+
+    useGlobalActionError(state.error)
+
+    if (state.success) {
+        redirect('/auth/login');
+    }
+
     return (
         <form action={formAction}>
-            <Button size="xs" color="secondary" type="submit" disabled={pending}>
+            <Button size="xs" color="primary" type="submit" disabled={pending}>
                 Вийти
             </Button>
         </form>

@@ -30,13 +30,20 @@ const CommentTooltip = ({ taskId, comments }: CommentTooltipProps) => {
 }
 
 export const ProjectContent = ({ project }: ProjectContentProps) => {
-    const { name, description, tasks } = project
+    const { name, dateStart, dateEnd, description, tasks } = project
     const statesKeys = Object.keys(projectStageLabels)
 
     return (
         
         <div className="my-5">
             <h1 className="font-bold">{name}</h1>
+            <p className="text-gray-700 dark:text-gray-300">
+            <span className="font-bold">Дата початку: </span>{dateStart?.toLocaleDateString()}
+            </p>
+            <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-bold">Дата завершення: </span>
+                {dateEnd?.toLocaleDateString()}
+            </p>
             <p className="py-2">{description}</p>
             <Timeline horizontal className="bg-zinc-50 justify-between border-2 border-white border-t-gray-400 border-b-gray-400 mb-5 p-10 rounded-[1vw] flex-wrap">
                 {statesKeys.map((key) => {

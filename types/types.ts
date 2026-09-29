@@ -1,11 +1,10 @@
 import { Task } from "@/lib/generated/prisma/browser";
 
-export type ActionState = {
+export type ActionState<T> = {
   success: boolean;
-  message: string;
-  errors?: {
-    [key: string]: string[];
-  };
+  message: string | null;
+  data?: T;
+  error?:  string | null;
 };
 
 export type TaskFormData = Omit<Task, "authorId" | "projectId" | "createdAt" | "updatedAt">

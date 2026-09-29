@@ -4,9 +4,9 @@ import { getUserProjects } from "@/entities/project/server/project-query";
 export default async function ProjectsPage(){
     const projects = await getUserProjects();
 
-    if (!Array.isArray(projects)) return null
+    if (!Array.isArray(projects.data)) return null
 
     return (
-        <ProjectList data={projects}/>
+        <ProjectList data={projects.data}/>
     )
 }

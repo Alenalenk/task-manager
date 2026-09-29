@@ -3,9 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { UserProject, UserProjectTask } from "@/types/project";
 import { ActionState } from "@/types/types";
 
-export async function getUserProjects(): Promise<UserProject[] | ActionState> {
+export async function getUserProjects(): Promise<ActionState<UserProject[]>> {
 
-    const id = await getUserId()
+    try {
+        const id = await getUserId()
 
     if (!id) {
         return {
@@ -33,12 +34,20 @@ export async function getUserProjects(): Promise<UserProject[] | ActionState> {
         userRole,
     }));
 
-    return projects
+    return {
+            success: false,
+            message: "Щось пішло не так",
+            data: projects
+        }
+    } catch (e) {
+        return {
+            success: false,
+            message: "Щось пішло не так"
+        }      
+    }
 }
 
-type ProjectActionState = ActionState & { data?: UserProjectTask }
-
-export async function getProject(id: number): Promise<ProjectActionState> {
+export async function getProject(id: number): Promise<ActionState<UserProjectTask>> {
     let project;
 
     try {

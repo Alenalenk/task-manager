@@ -2,8 +2,8 @@ import LogupForm from "@/features/auth/components/LogupForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Вхід | TaskManager',
-  description: 'Увійдіть у свій акаунт',
+  title: 'Реєстрація | TaskManager',
+  description: 'Створіть обліковий запис',
 }
 
 export default function Logup(){

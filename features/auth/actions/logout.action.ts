@@ -1,15 +1,12 @@
 'use server'
 
 import { deleteSession } from '@/lib/auth';
-import { redirect } from 'next/navigation'
 
 
 export type ActionState = {
   success: boolean;
-  message: string;
-  errors?: {
-    [key: string]: string[];
-  };
+  message: string | null;
+  error?: string;
 };
 
 
@@ -20,20 +17,20 @@ export async function logoutAction(
 
   try {
 
-    deleteSession();
-
+    await deleteSession();
     return {
       success: true,
-      message: 'Ви успішно вийшли з системи',
+      message: 'Успішно!',
     }
 
   } catch (err) {
     console.error('Login action error:', err)
     return {
       success: false,
-      message: 'Щось пішло не так. Спробуйте пізніше',
+      error: 'Щось пішло не так. Спробуйте пізніше',
+      message: null,
     }
   }
 
-  redirect('/login')
+  
 }

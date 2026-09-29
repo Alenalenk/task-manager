@@ -19,12 +19,12 @@ export async function createAction(
     if (!validated.success) {
         return {
             success: false,
-            message: 'Будь ласка, перевірте правильність введених даних',
+            error: 'Будь ласка, перевірте правильність введених даних',
+            message: null,
         }
     }
 
     const data = validated.data
-
 
     let project
 
@@ -33,7 +33,8 @@ export async function createAction(
         if (!data.name) {
             return {
                 success: false,
-                message: 'Заповніть поле назва',
+                error: 'Заповніть поле назва',
+                message: null,
             }
         }
 
@@ -42,7 +43,8 @@ export async function createAction(
         if(!userId){
             return {
                 success: false,
-                message: 'Користувач не знайдений'
+                error: 'Користувач не знайдений',
+                message: null
             }
         }
 
@@ -62,7 +64,8 @@ export async function createAction(
         console.error('Project create action error:', err)
         return {
             success: false,
-            message: 'Щось пішло не так. Спробуйте пізніше',
+            error: 'Щось пішло не так. Спробуйте пізніше',
+            message: null,
         }
     }
 

@@ -1,6 +1,5 @@
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 const secret = new TextEncoder().encode(
     process.env.JWT_SECRET
@@ -44,8 +43,6 @@ export const getSession = async (): Promise<string | null> => {
 
 export const deleteSession = async () => {
     const cookieStore = await cookies();
-
+    
     cookieStore.delete("session_user");
-
-    redirect("/auth/login");
 }

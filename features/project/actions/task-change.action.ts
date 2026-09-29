@@ -17,7 +17,8 @@ export async function taskChangeAction(
     if (!validated.success) {
         return {
             success: false,
-            message: 'Будь ласка, перевірте правильність введених даних',
+            message: null,
+            error: 'Будь ласка, перевірте правильність введених даних',
         }
     }
 
@@ -30,7 +31,8 @@ export async function taskChangeAction(
         if (!data.title) {
             return {
                 success: false,
-                message: 'Заповніть поле назва',
+                error: 'Заповніть поле назва',
+                message: null
             }
         }
 
@@ -39,7 +41,8 @@ export async function taskChangeAction(
         if (!userId) {
             return {
                 success: false,
-                message: 'Користувач не знайдений'
+                error: 'Користувач не знайдений',
+                message: null
             }
         }
 
@@ -58,7 +61,8 @@ export async function taskChangeAction(
 
         return {
             success: false,
-            message: 'Щось пішло не так. Спробуйте пізніше',
+            message: null,
+            error: 'Щось пішло не так. Спробуйте пізніше',
         }
     }
 }

@@ -6,10 +6,8 @@ const bcrypt = require('bcrypt');
 
 export type ActionState = {
   success: boolean;
-  message: string;
-  errors?: {
-    [key: string]: string[];
-  };
+  message: string | null;
+  error?: string;
 };
 
 
@@ -28,7 +26,8 @@ export async function logupAction(
   if (!email) {
     return {
       success: false,
-      message: "Email обов'язковий"
+      error: "Email обов'язковий",
+      message: null,
     };
   }
 

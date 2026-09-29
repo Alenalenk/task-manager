@@ -4,13 +4,16 @@ import { Button, Datepicker, Label, Modal, ModalBody, ModalFooter, ModalHeader, 
 import { startTransition, useActionState, useState } from "react"
 import { taskChangeAction } from "../actions/task-change.action";
 import { TaskWithComments } from "@/types/project";
-import { Status, Task } from "@/lib/generated/prisma/browser";
+import { Status } from "@/lib/generated/prisma/browser";
 import { TaskFormData } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { projectStageLabels } from "@/utils/enum";
+import { useGlobalActionError } from "@/app/shares/hooks/useGlobalActionError";
+import { Loader } from "@/app/shares/widgets/Loader";
 
 const initialState = {
     success: false,
+    error: "",
     message: "",
 };
 
@@ -29,6 +32,8 @@ export const ChangeTask = ({ task }: ChangeTaskProp) => {
         taskChangeAction,
         initialState
     );
+
+    useGlobalActionError(state.error)
 
     const [formTask, setFormTask] = useState<TaskFormData>(
         {
@@ -66,7 +71,7 @@ export const ChangeTask = ({ task }: ChangeTaskProp) => {
             <Modal show={openModal} onClose={() => setOpenModal(false)}>
                 <ModalHeader>Змінити задачу</ModalHeader>
                 <ModalBody>
-                    <div className="space-y-6">
+                    <div className="space-y-6 relative">
                         <form className="flex max-w-md flex-col gap-4">
                             <div>
                                 <div className="mb-2 block">
@@ -119,11 +124,12 @@ export const ChangeTask = ({ task }: ChangeTaskProp) => {
                             </div>
 
                             <Button
-                                type="button" color="secondary" size="xs"
+                                type="button" color="primary" size="xs"
                                 onClick={handleSubmit}>
-                               Зберегти
+                                Зберегти
                             </Button>
                         </form>
+                        {pending && <div className="absolute top-0 left-0 right-0 bottom-0 w-auto h-auto flex justify-center items-center bg-white/50"><Loader/></div>}
                     </div>
                 </ModalBody>
                 <ModalFooter>

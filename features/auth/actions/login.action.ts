@@ -9,10 +9,8 @@ import { createToken } from '@/lib/auth';
 
 export type ActionState = {
   success: boolean;
-  message: string;
-  errors?: {
-    [key: string]: string[];
-  };
+  message: string | null;
+  error?: string;
 };
 
 
@@ -28,7 +26,8 @@ export async function loginAction(
   if (!validated.success) {
     return {
       success: false,
-      message: 'Будь ласка, перевірте правильність введених даних',
+      error: 'Будь ласка, перевірте правильність введених даних',
+      message: null
     }
   }
 
@@ -43,7 +42,8 @@ export async function loginAction(
     if (!user || !user.password) {
       return {
         success: false,
-        message: 'Невірний email або пароль',
+        error: 'Невірний email або пароль',
+        message: null
       }
     }
 
@@ -52,7 +52,8 @@ export async function loginAction(
     if (!isPasswordValid) {
       return {
         success: false,
-        message: 'Невірний email або пароль',
+        error: 'Невірний email або пароль',
+        message: null
       }
     }
 
@@ -74,7 +75,8 @@ export async function loginAction(
     console.error('Login action error:', err)
     return {
       success: false,
-      message: 'Щось пішло не так. Спробуйте пізніше',
+      error: 'Щось пішло не так. Спробуйте пізніше',
+      message: null,
     }
   }
 

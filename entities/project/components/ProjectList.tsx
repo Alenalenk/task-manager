@@ -9,6 +9,7 @@ type ProjectList = {
 
 
 export default function ProjectList({ data }: ProjectList) {
+
     return (
         <div className="py-5">
             <h3 className="text-lg font-semibold text-center z-40">ПРОЕКТИ</h3>
@@ -29,7 +30,7 @@ export default function ProjectList({ data }: ProjectList) {
 
                             return (
                                 <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800" key={id}>
-                                    <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                    <TableCell className="whitespace-nowrap font-medium text-orange-700 dark:text-white font-bold">
                                         <Link href={`/project/${id}`} className="text-primary">{name}</Link>
                                     </TableCell>
                                     <TableCell>{description}</TableCell>

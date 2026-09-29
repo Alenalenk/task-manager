@@ -17,7 +17,8 @@ export async function commentCreateAction(
     if (!validated.success) {
         return {
             success: false,
-            message: 'Будь ласка, перевірте правильність введених даних',
+            error: 'Будь ласка, перевірте правильність введених даних',
+            message: '',
         }
     }
 
@@ -30,7 +31,8 @@ export async function commentCreateAction(
         if (!data.comment) {
             return {
                 success: false,
-                message: 'Заповніть поле назва',
+                error: 'Заповніть поле назва',
+                message: null,
             }
         }
 
@@ -39,7 +41,8 @@ export async function commentCreateAction(
         if (!userId) {
             return {
                 success: false,
-                message: 'Користувач не знайдений'
+                error: 'Користувач не знайдений',
+                message: null
             }
         }
 
