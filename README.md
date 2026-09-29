@@ -62,6 +62,7 @@ Create a `.env` file in the root directory of the project and add the following 
 ```env
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
 JWT_SECRET="your-secret-key"
+```
 
 ## Running Locally
 
