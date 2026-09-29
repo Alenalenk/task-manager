@@ -72,6 +72,6 @@ JWT_SECRET="your-secret-key"
 4. Run Prisma migrations
 5. Start the development server
 
-npm install
-npx prisma migrate dev
-npm run dev
+npm install <br>
+npx prisma migrate dev <br>
+npm run dev <br>
